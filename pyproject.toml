@@ -8,6 +8,8 @@ authors = ["Nicholas Bau <57227204+ncholasb@users.noreply.github.com>"]
 python = "^3.10"
 pytest = "^6.2.5"
 factory-boy = "^3.2.1"
+django-rest-framework = "^0.1.0"
+django-extensions = "^3.1.5"
 
 [tool.poetry.dev-dependencies]
 
