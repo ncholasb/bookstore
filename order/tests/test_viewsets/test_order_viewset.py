@@ -1,18 +1,16 @@
-from itertools import product
 import json
 
-from rest_framework import status
-from rest_framework import APITestCase, APIClient
-
 from django.urls import reverse
+from rest_framework import status
+from rest_framework.test import APIClient, APITestCase
 
-from product.factories import CategoryFactory, ProductFactory
-from order.factories import UserFactory, OrderFactory
-from product.models import Product
+from order.factories import OrderFactory, UserFactory
 from order.models import Order
+from product.factories import CategoryFactory, ProductFactory
+from product.models import Product
 
 
-class TestOrderViewSet(APIClient):
+class TestOrderViewSet(APITestCase):
 
     client = APIClient()
 
@@ -24,25 +22,29 @@ class TestOrderViewSet(APIClient):
         self.order = OrderFactory(product=[self.product])
 
     def test_order(self):
-        """
-        Test order
-        """
         response = self.client.get(reverse("order-list", kwargs={"version": "v1"}))
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        order_data = json.loads(response.content)[0]
-        self.assertEqual(order_data["product"][0]["title"], self.product.title)
-        self.assertEqual(order_data["product"][0]["price"], self.product.price)
-        self.assertEqual(order_data["product"][0]["active"], self.product.active)
+        order_data = json.loads(response.content)
         self.assertEqual(
-            order_data["product"][0]["category"][0]["title"], self.product.title
+            order_data["results"][0]["product"][0]["title"], self.product.title
+        )
+        self.assertEqual(
+            order_data["results"][0]["product"][0]["price"], self.product.price
+        )
+        self.assertEqual(
+            order_data["results"][0]["product"][0]["active"], self.product.active
+        )
+        self.assertEqual(
+            order_data["results"][0]["product"][0]["category"][0]["title"],
+            self.category.title,
         )
 
     def test_create_order(self):
         user = UserFactory()
         product = ProductFactory()
-        data = json.dumps({"product_id": [product.id], "user": user.id})
+        data = json.dumps({"products_id": [product.id], "user": user.id})
 
         response = self.client.post(
             reverse("order-list", kwargs={"version": "v1"}),
