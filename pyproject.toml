@@ -12,6 +12,8 @@ django-rest-framework = "^0.1.0"
 django-extensions = "^3.1.5"
 django-debug-toolbar = "^3.2.4"
 cleo = "^0.8.1"
+psycopg2-binary = "^2.9.3"
+flake8 = "^4.0.1"
 
 [tool.poetry.dev-dependencies]
 black = {version = "^22.1.0", allow-prereleases = true}
