@@ -1,7 +1,5 @@
-  name: Python application
-
+name: Python application
 on: [push]
-
 jobs:
   build:
     strategy:
