@@ -21,13 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "n%7hz5rqzj2(1)y&fq96#!r6&fw0j@(iyikc&)_#(q&2h7l_i4"
 # os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get("DEBUG", default=0))
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(" ")
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "bookstore-nic-api.herokuapp.com"]
+# os.environ.get("ALLOWED_HOSTS", "*").split(" ")
 
 # Application definition
 
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -77,6 +78,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "bookstore.wsgi.application"
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATIC_FILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
