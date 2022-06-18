@@ -24,9 +24,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-i-er6tj81gf84n!pmf*t7mt(u73f^(_#ovko6i^sl6@c)8@@)t"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get("DEBUG", default=0))
+DEBUG = True
+# int(os.environ.get("DEBUG", default=0))
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "bookstore-nic-api.herokuapp.com"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "bookstore-nic-api.herokuapp.com",
+    "bookstore-nic-api.herokuapp.com*",
+]
 # os.environ.get("ALLOWED_HOSTS", "*").split(" ")
 
 # Application definition
