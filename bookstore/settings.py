@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-i-er6tj81gf84n!pmf*t7mt(u73f^(_#ovko6i^sl6@c)8@@)t
 DEBUG = True
 # int(os.environ.get("DEBUG", default=0))
 
-CSRF_TRUSTED_ORIGINS = ["*"]
+CSRF_TRUSTED_ORIGINS = ["https://bookstore-nic-api.herokuapp.com"]
 
 ALLOWED_HOSTS = [
     "localhost",
